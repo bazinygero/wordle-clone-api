@@ -74,9 +74,10 @@ const handleClick = (letter) => {
         console.log('delete letter')
         return
     }
-    if (letter === 'ENTER')
+    if (letter === 'ENTER') {
         console.log('check row')
         return
+    }
     addLetter(letter)
 }
 
