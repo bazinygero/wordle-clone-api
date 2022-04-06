@@ -111,6 +111,7 @@ const checkRow = () => {
     const guess = guessRows[currentRow].join('')
     if(currentTile > 4) {
         console.log('my guess is ' + guess, 'wordle is ' + wordle)
+        flipTile()
         if(wordle == guess) {
             showMessage("It's right! Well done!")
             isGameOver = true
@@ -137,12 +138,20 @@ const showMessage = (message) => {
 }
 
 const flipTile = () => {
-    const rowTiles = document.querySelector('guessRow-' + currentRow).childNodes
+    const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
     rowTiles.forEach((tile, index) => {
         const dataLetter = tile.getAttribute('data')
-        if(dataLetter == wordle[index]) {
-            tile.classList.add('green-overlay')
-        }
-    })
-
+        
+        setTimeout(() => {
+            tile.classList.add('flip')
+            if(dataLetter == wordle[index]) {
+                tile.classList.add('green-overlay')
+            } else if(wordle.includes(dataLetter)) {
+                tile.classList.add('yellow-overlay')
+            } else {
+                tile.classList.add('grey-overlay')
+            }
+        }, 500 * index)
+        })
+        
 }
